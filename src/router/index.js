@@ -10,6 +10,7 @@ import Light from "../components/light"
 import Group from "../components/group"
 import Car from "../components/car"
 import My from "../components/my"
+import Register from "../components/register"
 
 Vue.use(Router)
 
@@ -58,6 +59,10 @@ const router = new Router({
       path: '/my',
       component: My
     },
+    {
+      path: '/register',
+      component: Register
+    }, 
     {
     	path:"*",
     	redirect:"/home"

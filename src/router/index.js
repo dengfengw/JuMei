@@ -67,7 +67,7 @@ const router = new Router({
     {
       path: '/detail',
       component: Detail
-    }
+    },
     {
     	path:"*",
     	redirect:"/home"

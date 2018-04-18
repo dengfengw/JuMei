@@ -2,7 +2,7 @@
 	<div class="top">
 		<header>
 			<a class="search">
-				<img src="//f0.jmstatic.com/btstatic/h5/common/search_btn.png">
+				<img src="//f0.jmstatic.com/btstatic/h5/common/search_btn.png" style="display: inline-block;">
 				<span>搜索商品 分类 功效</span>
 			</a>
 			<span class="right">
@@ -65,49 +65,49 @@ li{
 	list-style: none;
 }
 header{
-	padding: 0 10px;
-	height: 45px;
+	padding: 0 0.1rem;
+	height: 0.45rem;
 	display: flex;
 	align-items: center;
 	width: 100%;
 	box-sizing: border-box;
 	.search{
-		margin: 5px 20px 5px 10px;
+		margin: 0.05rem 0.2rem 0.05rem 0.1rem;
     color: #999;
     background: #f5f5f5;
-    border-radius: 15px;
-    height: 30px;
-    line-height: 30px;
+    border-radius: 0.15rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
     -webkit-box-shadow: 0 0.0625rem 0.125rem rgba(0,0,0,.05) inset;
     box-shadow: inset 0 0.0625rem 0.125rem rgba(0,0,0,.05);
-    font-size: 14px;
+    font-size: 0.14rem;
     text-align: center;
 		flex: 1;
 		img{
-			width: 14px;
+			width: 0.14rem;
 		}
 	}
 	.right{
-		height: 18px;
+		height: 0.18rem;
 		img{
-			width: 24px;
+			width: 0.24rem;
 		}
 	}
 }
 .navlist{
 	width: 100%;
-	height: 45px;
+	height: 0.45rem;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-end;
-	border-bottom: 1px solid #eee;
+	border-bottom: 0.01rem solid #eee;
 	a{
 		text-decoration: none;
-		font-size: 14px;
+		font-size: 0.14rem;
 		color: #666;
 		div{
-			margin-top: 10px;
-			height: 3px;
+			margin-top: 0.01rem;
+			height: 0.03rem;
 		}
 	}
 	.router-link-exact-active{

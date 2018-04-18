@@ -6,6 +6,10 @@ import Topspeed from "../components/speed"
 import Today from "../components/today"
 import Tomorrow from "../components/tomorrow"
 import Mom from "../components/mom"
+import Light from "../components/light"
+import Group from "../components/group"
+import Car from "../components/car"
+import My from "../components/my"
 
 Vue.use(Router)
 
@@ -39,9 +43,26 @@ const router = new Router({
       component: Mom
     },
     {
+      path: '/light',
+      component: Light
+    },
+    {
+      path: '/car',
+      component: Car
+    },
+    {
+      path: '/group',
+      component: Group
+    },
+    {
+      path: '/my',
+      component: My
+    },
+    {
     	path:"*",
     	redirect:"/home"
     }
+    
   ]
 })
 export default router;

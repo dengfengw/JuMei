@@ -22,7 +22,7 @@
 
 		data(){
 			return {
-				
+
 			}
 		},
 		methods:{
@@ -37,7 +37,7 @@
 </script>
 
 
-<style lang="scss" scoped>	
+<style lang="scss" scoped>
 .login{
 	width: 100%;
 	height: 100%;
@@ -94,7 +94,7 @@
 				margin-left: 0.1rem;
 				text-align: center;
 				line-height: 0.36rem;
-			}	
+			}
 		}
 		p:nth-of-type(4){
 			border-radius: 0.2rem;

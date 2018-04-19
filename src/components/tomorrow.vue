@@ -1,20 +1,21 @@
+
 <template>
 	<div>
-			 
+
 			<ul  v-infinite-scroll="loadMore"
   infinite-scroll-disabled="loading"
   infinite-scroll-immediate-check	="false"
   infinite-scroll-distance="0">
 				<li v-for="data in datalist" @click="handleClick(data.id)" >
-				
+
 				<h5 id="title">{{data.name}}</h5>
 				<p id="price">￥{{data.jumei_price}}<span>{{data.market_price}}<i></i></span></p>
 				<p id="count">{{data.deal_comments_number}}</p>
 				<img :src="data.image_url_set.dx_image?data.image_url_set.dx_image.url['320']:data.image_url_set.main['800']">
 			</li>
-			</ul>	
+			</ul>
 
-			
+
 	</div>
 </template>
 
@@ -51,17 +52,17 @@
 					//console.log(res.data.item_list[i].image_url_set.dx_image.url['320']);
 						console.log(res.data.item_list[i].jumei_price);
 				}
-				
-				
+
+
 
 			})
 		},
 
 		methods:{
 			handleClick(id){
-				
+
 console.log(this.datalist[0].image_url_set);
-				
+
 			},
 
 			loadMore(){
@@ -111,7 +112,7 @@ console.log(this.datalist[0].image_url_set);
 				span{
 					font-size: 0.14rem;
 					margin-left: 0.2rem;
-					color: #797979; 
+					color: #797979;
 					i{
 						display: block;
 						width: 0.28rem;

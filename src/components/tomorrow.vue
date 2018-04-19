@@ -1,21 +1,20 @@
-
 <template>
 	<div>
-
+			 
 			<ul  v-infinite-scroll="loadMore"
   infinite-scroll-disabled="loading"
   infinite-scroll-immediate-check	="false"
   infinite-scroll-distance="0">
 				<li v-for="data in datalist" @click="handleClick(data.id)" >
-
-				<h5 id="title">{{data.name}}</h5>
-				<p id="price">￥{{data.jumei_price}}<span>{{data.market_price}}<i></i></span></p>
-				<p id="count">{{data.deal_comments_number}}</p>
+				
+				<!-- <h5 id="title">{{data.name}}</h5>
+				<p id="price">￥{{data.jumei_price}}<span>{{data.market_price}}</span></p>
+				<p id="count">{{data.deal_comments_number}}</p> -->
 				<img :src="data.image_url_set.dx_image?data.image_url_set.dx_image.url['320']:data.image_url_set.main['800']">
 			</li>
-			</ul>
+			</ul>	
 
-
+			
 	</div>
 </template>
 
@@ -44,25 +43,29 @@
 		},
 
 		mounted(){
-			axios.get("/api/v1/deal/dealactlist?card_id=4057&page=2&page_key=1524051720&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj").then(res=>{
+			axios.get("/api/v1/deal/dealactlist?card_id=4057&page=1&page_key=1524051720&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj").then(res=>{
 				console.log(res.data.item_list);
-
-				this.datalist= res.data.item_list;
+				for(var i=0;i<res.data.item_list.length;i++){
+				if(res.data.item_list[i].type=="jmstore" ){
+					this.datalist.push(res.data.item_list[i]);
+				}
+			}
+				//this.datalist= res.data.item_list;
 				for(var i=0;i<res.data.item_list.length;i++){
 					//console.log(res.data.item_list[i].image_url_set.dx_image.url['320']);
 						console.log(res.data.item_list[i].jumei_price);
 				}
-
-
+				
+				
 
 			})
 		},
 
 		methods:{
 			handleClick(id){
-
+				
 console.log(this.datalist[0].image_url_set);
-
+				
 			},
 
 			loadMore(){
@@ -113,6 +116,7 @@ console.log(this.datalist[0].image_url_set);
 					font-size: 0.14rem;
 					margin-left: 0.2rem;
 					color: #797979;
+					text-decoration: line-through; 
 					i{
 						display: block;
 						width: 0.28rem;

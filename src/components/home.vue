@@ -1,11 +1,11 @@
-
 <template>
 	<div>
+
 			<ul>
 				<router-link tag="li" to="/home/today" activeClass="active">今日10点上新</router-link>
 				<router-link tag="li" to="/home/tomorrow" activeClass="active">明日10点上新</router-link>
-			</ul>
-
+			</ul>	
+			
 			<router-view></router-view>
 	</div>
 </template>

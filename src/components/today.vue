@@ -1,21 +1,20 @@
-
 <template>
 	<div>
-
+			 
 			<ul  v-infinite-scroll="loadMore"
   infinite-scroll-disabled="loading"
   infinite-scroll-immediate-check	="false"
   infinite-scroll-distance="0">
-				<li v-for="data in datalist" @click="handleClick(data.id)" >
-
+				<li v-for="data in datalist" @click="handleClick(data.item_id)" >
+				
 				<h5 id="title">{{data.name}}</h5>
-				<p id="price">￥{{data.jumei_price}}<span>{{data.market_price}}<i></i></span></p>
-				<p id="count">{{data.deal_comments_number}}</p>
+				<p id="price">￥{{data.jumei_price}}<span>{{data.market_price}}</span></p>
+				<p id="count">{{data.deal_comments_number}}条评论</p>
 				<img :src="data.image_url_set.dx_image?data.image_url_set.dx_image.url['320']:data.image_url_set.main['800']">
 			</li>
-			</ul>
+			</ul>	
 
-
+			
 	</div>
 </template>
 
@@ -46,23 +45,26 @@
 		mounted(){
 			axios.get("/api/v1/deal/dealactlist?card_id=4057&page=1&page_key=1524021000&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj").then(res=>{
 				console.log(res.data.item_list);
-
-				this.datalist= res.data.item_list;
 				for(var i=0;i<res.data.item_list.length;i++){
-					//console.log(res.data.item_list[i].image_url_set.dx_image.url['320']);
-						console.log(res.data.item_list[i].jumei_price);
+				if(res.data.item_list[i].type=="global_deal" || res.data.item_list[i].type=="jumei_pop"){
+					this.datalist.push(res.data.item_list[i]);
 				}
-
-
+				console.log(this.datalist);
+			}
+				for(var i=0;i<res.data.item_list.length;i++){
+						console.log(res.data.item_list[i].type);
+				}
+				
+				
 				//this.total =res.data.data.page.total //总页数
 			})
 		},
 
 		methods:{
 			handleClick(id){
-
+				
 				router.push(`/detail/${id}`);
-
+				
 			}
 
 			/*loadMore(){
@@ -79,7 +81,7 @@
 					console.log(res.data);
 					this.datalist= [...this.datalist,...res.data.data.films]; //合并两个数组
 				})*/
-
+			
 
 		}
 
@@ -112,7 +114,8 @@
 				span{
 					font-size: 0.14rem;
 					margin-left: 0.2rem;
-					color: #797979;
+					color: #797979; 
+					text-decoration: line-through;
 					i{
 						display: block;
 						width: 0.28rem;
@@ -127,7 +130,7 @@
 				font-size: 0.1rem;
 				left: 2rem;
 				position: absolute;
-				top: 1.3rem;
+				top: 1.1rem;
 			}
 			img{
 				float:left;
@@ -135,4 +138,5 @@
 			}
 		}
 	}
+
 </style>

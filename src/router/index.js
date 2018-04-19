@@ -9,7 +9,9 @@ import Mom from "../components/mom"
 import Light from "../components/light"
 import Group from "../components/group"
 import Car from "../components/car"
-import My from "../components/my"
+//import My from "../components/my"
+import Register from "../components/register"
+import Detail from "../components/detail"
 
 Vue.use(Router)
 
@@ -54,9 +56,17 @@ const router = new Router({
       path: '/group',
       component: Group
     },
+//    {
+//      path: '/my',
+//      component: My
+//    },
     {
-      path: '/my',
-      component: My
+      path: '/register',
+      component: Register
+    },
+    {
+      path: '/detail',
+      component: Detail
     },
     {
     	path:"*",

@@ -62,7 +62,7 @@ const router = new Router({
     	path:"*",
     	redirect:"/home"
     }
-    
+
   ]
 })
 export default router;

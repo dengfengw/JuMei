@@ -11,7 +11,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        able: {
           '/api': {
               target: 'http://s.mobile.jumei.com',
               host: 's.mobile.jumei.com',

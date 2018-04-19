@@ -11,10 +11,17 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        able: {
           '/api': {
               target: 'http://s.mobile.jumei.com',
               host: 's.mobile.jumei.com',
+              changeOrigin:true,
+              // pathRewrite: {
+              //     '^/v4/api': '/v4/api'
+              //   }
+          },
+          '/index': {
+              target: 'http://h5.jumei.com',
+              host: 'h5.jumei.com',
               changeOrigin:true,
               // pathRewrite: {
               //     '^/v4/api': '/v4/api'
@@ -30,7 +37,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

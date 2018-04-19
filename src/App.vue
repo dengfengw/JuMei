@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-    
-    <navbar ></navbar>
-    <sidebar></sidebar>  
-    <footbar></footbar> 
+
+    <navbar>
+      <span class="right" @click="isShow=true">
+        <img src="//f0.jmstatic.com/btstatic/h5/index/search_list2.png">
+      </span>
+    </navbar>
+    <sidebar v-show="isShow">
+      <span @click="isShow=false">返回</span>
+    </sidebar>
+    <footbar></footbar>
 
     <section>
       <router-view></router-view>
-    </section> 
+    </section>
   </div>
 </template>
 
@@ -21,7 +27,7 @@ export default {
 
   data(){
     return {
-      
+      isShow:false
     }
   },
 

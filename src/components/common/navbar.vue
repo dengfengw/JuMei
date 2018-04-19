@@ -5,9 +5,7 @@
 				<img src="//f0.jmstatic.com/btstatic/h5/common/search_btn.png" style="display: inline-block;">
 				<span>搜索商品 分类 功效</span>
 			</a>
-			<span class="right">
-				<img src="//f0.jmstatic.com/btstatic/h5/index/search_list2.png">
-			</span>
+			<slot></slot>
 		</header>
 		<ul class="navlist" @click="handleClick()">
 			<router-link to="/home" tag="li">
@@ -28,7 +26,7 @@
 					<div></div>
 				</a>
 			</router-link>
-			<router-link to="" tag="li">
+			<router-link to="/light" tag="li">
 				<a href="#">
 					<span>轻奢</span>
 					<div></div>
@@ -49,7 +47,6 @@
 		methods:{
 			handleClick(){
 				this.$emit("event");
-				console.log(event);
 			}
 		}
 	}

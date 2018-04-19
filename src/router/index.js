@@ -12,6 +12,7 @@ import Car from "../components/car"
 import My from "../components/my"
 import Register from "../components/register"
 import Detail from "../components/detail"
+import GroupDetail from "../components/groupdetail"
 
 Vue.use(Router)
 
@@ -23,11 +24,11 @@ const router = new Router({
       component: HomeComponent,
       children:[
     		{
-    			path:"/today",
+    			path:"today",
     			component:Today
     		},
     		{
-    			path:"/tomorrow",
+    			path:"tomorrow",
     			component:Tomorrow
     		}
     	]
@@ -54,7 +55,11 @@ const router = new Router({
     },
     {
       path: '/group',
-      component: Group
+      component: Group,
+    },
+    {
+    	path:"/groupdetail/:id",
+    	component:GroupDetail
     },
     {
       path: '/my',
@@ -63,16 +68,16 @@ const router = new Router({
     {
       path: '/register',
       component: Register
-    },
+    }, 
     {
-      path: '/detail',
+      path: '/detail/:id',
       component: Detail
     },
     {
     	path:"*",
     	redirect:"/home"
     }
-
+    
   ]
 })
 export default router;

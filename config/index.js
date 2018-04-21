@@ -22,6 +22,20 @@ module.exports = {
               changeOrigin:true,
              
           },
+          //注册
+          '/jumeiregister': {
+              target: 'http://localhost:3000',
+              host: 'localhost:3000',
+              changeOrigin:true,
+             
+          },
+          //登录
+          '/jumeilogin': {
+              target: 'http://localhost:3000',
+              host: 'localhost:3000',
+              changeOrigin:true,
+             
+          },
            '/index': {
               target: 'http://h5.jumei.com',
               host: 'h5.jumei.com',

@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-
-    <navbar>
+    <navbar v-show="shownav">
       <span class="right" @click="isShow=true">
         <img src="//f0.jmstatic.com/btstatic/h5/index/search_list2.png">
       </span>
@@ -9,11 +8,12 @@
     <sidebar v-show="isShow">
       <span @click="isShow=false">返回</span>
     </sidebar>
-    <footbar></footbar>
-
+    <footbar v-on:index_show="showindex"></footbar>
     <section>
       <router-view></router-view>
     </section>
+    <div class="boxzz" v-show="isShow">
+    </div>
   </div>
 </template>
 
@@ -27,10 +27,20 @@ export default {
 
   data(){
     return {
-      isShow:false
+      isShow:false,
+      shownav:true
     }
   },
-
+  methods:{
+    showindex(index){
+      console.log(index);
+      if (index==0) {
+        this.shownav=true;
+      } else {
+        this.shownav=false;
+      }
+    }
+  },
   components:{
     navbar,
     sidebar,
@@ -50,7 +60,14 @@ html,body{
   width: 100%;
   height: 100%;
 }
-
+.boxzz{
+  background: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 4;
+    top: 0;
+}
 
 
 </style>

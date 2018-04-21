@@ -16,11 +16,16 @@ module.exports = {
               host: 's.mobile.jumei.com',
               changeOrigin:true,
           },
+          '/product': {
+              target: 'http://h5.jumei.com',
+              host: 'h5.jumei.com',
+              changeOrigin:true,
+          },
           '/yiqituan': {
               target: 'http://s.h5.jumei.com',
               host: 's.mobile.jumei.com',
               changeOrigin:true,
-             
+
           },
            '/index': {
               target: 'http://h5.jumei.com',
@@ -42,7 +47,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

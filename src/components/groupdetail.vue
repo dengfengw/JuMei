@@ -17,12 +17,21 @@
 				<a>{{datalist_name.group_name_tag}}</a>
 				<a>{{datalist_name.medium_name}}</a>
 			</div>
+			<div class="group-guize">
+				<p><a>拼团玩法</a><a>查看规则<span>&gt</span></a></p>
+				<p><a>支付<br>开团/参团</a><span>&gt</span><a>邀请<br>好友参团</a><span>&gt</span><a>拼团成立立即发货<br>逾期未成团自动退款</a><span>&gt</span></p>
+				
+			</div>
+			<div class="jumeiser">
+				<img src="http://a4.jmstatic.com/3917f15b23ae1ca0/logowxffh.png"/>
+				<p>聚美官方服务号<br><span>更多靠谱优惠推荐，尽在聚美微信服务</span></p>
+			</div>
 		</div>
 		
 		
 		<div class="group-foot">
-			<p class="f1">首页</p>
-			<p class="f2"><b>{{datalist['group_single_price'].slice(3,7)}}</b><a>单独买</a></p>
+			<p class="f1" @click="tohome">首页</p>
+			<p class="f2"><b>{{datalist['group_single_price']}}</b></p>
 			<p class="f3"><b>{{datalist.group_jumei_price}}</b><a>包邮开团</a></p>
 		</div>			
 		<router-view></router-view>
@@ -47,13 +56,11 @@
 
 		mounted(){
 			console.log(this.$route.params.id);
-
 			axios.get("/yiqituan/ajaxDetail?item_id="+this.$route.params.id+"&type=jumei_pop&tid=").then(res=>{
-//				console.log(res.data.data);
-
+				console.log(res.data.data);
 				this.datalist= res.data.data;
-				console.log(this.datalist.recommend_data[0].group_name_tag);
-				this.info = this.datalist['buy_alone']['image_url_set']['single']['800'];
+//				console.log(this.datalist.recommend_data[0].image_url_set.single['url']);
+//				this.info = this.datalist.recommend_data[0].image_url_set.single['url']['800'];
 
 			})
 			
@@ -61,15 +68,16 @@
 				for(var i=0;i<res.data.data.length;i++){
 					if(res.data.data[i].item_id==this.$route.params.id){
 						this.datalist_name= res.data.data[i];
+						this.info= this.datalist_name.image_url_set['single']['800'];
 					}
 				}
 			})
 		},
 
 		methods:{
-			
-		
-
+			tohome(){
+				router.push('/home');
+			}
 		}
 
 	}
@@ -83,6 +91,9 @@ body{
 .group-box{
 	font-size: 0.16rem;
 	background: #F2F2F2;
+	position: absolute;
+	z-index: 99;
+	top:0;
 	.group-title{
 		display: flex;
 		flex-direction: column;
@@ -126,18 +137,65 @@ body{
 		}
 	}
 	.group-msg{
-		display: flex;
 		font-size: 0.14rem;
 		background: #fff;
 		height: 0.4rem;
 		line-height: 0.4rem;
 		border-bottom: 0.1rem solid #F2F2F2;
-		margin-bottom: 0.86rem;
+		margin-bottom: 0.16rem;
+		overflow: hidden;
 		a:nth-of-type(1){
 			margin-left: 0.2rem;
 			color: red;
-			font-size: 0.16rem;
+			font-size: 0.14rem;
 		}	
+	}
+	.group-guize{
+		margin-bottom: 0.16rem;
+		display: flex;
+		flex-direction: column;
+		p{
+			display: flex;
+			justify-content: space-between;
+			/*margin: 0 0.2rem;*/
+			background: #fff;
+			padding: 0.1rem 0.2rem;
+		}
+		p:nth-of-type(2){
+			align-content: center;
+			font-size: 0.14rem;
+			box-sizing: content-box;
+			a{
+				text-align: center;
+			}
+			a:nth-of-type(1){
+				color: red;
+			}
+			span{
+				font-size: 0.26rem;
+				color: #797979;
+				margin-left: 0.1rem;
+			}
+		}
+		
+	}
+	.jumeiser{
+		margin-bottom: 0.86rem;
+		background: #fff;
+		border-bottom: 0.16rem solid #F2F2F2;
+		display: flex;
+		padding: 0.1rem 0.2rem;
+		justify-content: flex-start;
+		align-items: center;
+		img{
+			width:20%;
+			height: 20%;
+			margin-right: 0.2rem;
+		}
+		span{
+			font-size: 0.14rem;
+			color: #797979;
+		}
 	}
 	
 }
@@ -147,6 +205,7 @@ body{
 		justify-content: space-between;
 		background: #fff;
 		position: fixed;
+		z-index: 10000;
 		bottom: 0;
 		padding-bottom: 0.1rem;
 		p{

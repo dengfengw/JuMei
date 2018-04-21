@@ -1,6 +1,6 @@
 <template>
 	<div>
-
+		 
 			<ul >
 				<li v-for="data in datalist">
 				<img :src="data.image_url_set['single']['800']" />
@@ -9,7 +9,7 @@
 					<a>{{data.group_name_tag}}</a>
 					<span>{{data.short_name}}</span>
 				</p>
-
+					
 				<p>
 					<a>
 						<span><em>{{data.jumei_price}}</em><i>{{data.market_price}}</i></span>
@@ -20,7 +20,7 @@
 			</li>
 			</ul>
 			<router-view></router-view>
-
+			
 	</div>
 </template>
 
@@ -48,8 +48,9 @@
 
 		methods:{
 			groupClick(id){
-				router.push(`/groupdetail/${id}`);
+				router.push(`/groupdetail/${id}`);		
 			}
+
 		}
 
 	}
@@ -126,7 +127,7 @@
 					margin-left: 0.2rem;
 					sapn{
 						color: #cecece;
-
+						
 					}
 					span:nth-of-type(1){
 						height: 0.2rem;

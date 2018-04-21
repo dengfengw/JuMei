@@ -10,11 +10,14 @@
 			<slot></slot>
 		</header>
 		<ul @click="handleClick()">
-			<li v-for="(data,index) in datalist">
+			<li v-for="(data,index) in sidelist">
 				{{data.name}}
 				<i class="iconfont icon-moreunfold"></i>
 			</li>
 		</ul>
+	</div>
+	<div class="boxsearh">
+
 	</div>
 	</aside>
 	</transition>
@@ -26,8 +29,8 @@ import axios from "axios";
 
 		data(){
 			return {
-				datalist:[],
-				datalist1:[]
+				sidelist:[]
+				//datalist1:[]
 			}
 		},
 		methods:{
@@ -40,8 +43,8 @@ import axios from "axios";
 	 ).then(res=>{
 		 			//console.log(res.data.data);
 					//console.log(res.data.data[0].sub_categories);
-					this.datalist=res.data.data;
-					this.datalist1=res.data.data[0].sub_categories
+					this.sidelist=res.data.data;
+					//this.datalist1=res.data.data[0].sub_categories
 		 		})
 		 }
 	}
@@ -52,22 +55,26 @@ import axios from "axios";
 	li{
 		list-style: none;
 	}
+	.side{
+		width: 80%;
+		float: right;
+		background: #fff;
+		border: 1px solid #f5f5f5;
+		height: 100%;
+	}
 	aside{
 		font-size: 0.14rem;
-		width: 80%;
+		width: 100%;
 		height: 100%;
 		position: fixed;
 		z-index: 5;
 		top: 0;
 		right: 0;
-		background: #fff;
-		border: 1px solid #f5f5f5;
 		header{
 			padding: 0 0.1rem;
 			height: 0.45rem;
 			display: flex;
 			align-items: center;
-			width: 100%;
 			box-sizing: border-box;
 			border-bottom: 1px solid #f5f5f5;
 			.search{

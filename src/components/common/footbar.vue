@@ -1,39 +1,32 @@
 <template>
 	<footer>
-		<ul @click="handleClick()">
-			<router-link to="/home" tag="li">
-				<i class="iconfont icon-store"></i>
-				<p>首页</p>
-			</router-link>
-			<router-link to="/group" tag="li">
-				<i class="iconfont icon-smile"></i>
-				<p>拼团</p>
-			</router-link>
-			<router-link to="/car" tag="li">
-				<i class="iconfont icon-bags"></i>
-				<p>购物车</p>
-			</router-link>
-			<slot></slot>
-			<router-link to="/my" tag="li" @click="show=false">
-				<i class="iconfont icon-account"></i>
-				<p>我的</p>
-			</router-link>
-
+		<ul @click="handleClick()" id="list">
+			<li v-for="data in footlist" @click="hand(data.index)">
+				<router-link :to="data.ahref">
+					<i :class="data.class"></i>
+					<p>{{data.name}}</p>
+				</router-link>
+			</li>
 		</ul>
 	</footer>
 </template>
 
 <script type="text/javascript">
 	export default {
-
 		data(){
 			return {
-
+				footlist:[{ahref:"/home/today",name:"首页",class:"iconfont icon-store",index:0},
+									{ahref:"/group",name:"拼团",class:"iconfont icon-smile",index:1},
+									{ahref:"/car",name:"购物车",class:"iconfont icon-bags",index:2},
+									{ahref:"/my",name:"我的",class:"iconfont icon-account",index:3}]
 			}
 		},
 		methods:{
 			handleClick(){
-				this.$emit("event");
+			},
+			hand(index){
+				//console.log(index);
+				this.$emit("index_show",index)
 			}
 		}
 	}

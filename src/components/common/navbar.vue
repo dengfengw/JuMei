@@ -7,32 +7,35 @@
 			</a>
 			<slot></slot>
 		</header>
-		<ul class="navlist" @click="handleClick()">
-			<router-link to="/home" tag="li">
-				<a href="#">
-					<span>首页</span>
-					<div class="line"></div>
-				</a>
-			</router-link>
-			<router-link to="/speed" tag="li">
-				<a href="#">
-					<span>极速免税店</span>
-					<div></div>
-				</a>
-			</router-link>
-			<router-link to="/mom" tag="li">
-				<a href="#">
-					<span>母婴</span>
-					<div></div>
-				</a>
-			</router-link>
-			<router-link to="/light" tag="li">
-				<a href="#">
-					<span>轻奢</span>
-					<div></div>
-				</a>
-			</router-link>
-		</ul>
+		<div class="searchBar" id="searchBar">
+			<ul @click="handleClick()" :class="searchBarFixed">
+				<router-link to="/home/today" tag="li">
+					<a href="#">
+						<span>首页</span>
+						<div class="line"></div>
+					</a>
+				</router-link>
+				<router-link to="/speed" tag="li">
+					<a href="#">
+						<span>极速免税店</span>
+						<div></div>
+					</a>
+				</router-link>
+				<router-link to="/mom" tag="li">
+					<a href="#">
+						<span>母婴</span>
+						<div></div>
+					</a>
+				</router-link>
+				<router-link to="/light" tag="li">
+					<a href="#">
+						<span>轻奢</span>
+						<div></div>
+					</a>
+				</router-link>
+			</ul>
+		</div>
+
 	</div>
 </template>
 
@@ -41,12 +44,24 @@
 
 		data(){
 			return {
-
+				searchBarFixed:""
 			}
+		},
+		mounted(){
+			 window.addEventListener('scroll', this.handleScroll)
 		},
 		methods:{
 			handleClick(){
 				this.$emit("event");
+			},
+			handleScroll () {
+			 var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+			 var offsetTop = document.querySelector('#searchBar').offsetTop
+				if (scrollTop > offsetTop) {
+				this.searchBarFixed = "true";
+				} else {
+				this.searchBarFixed = "false";
+				}
 			}
 		}
 	}
@@ -91,31 +106,40 @@ header{
 		}
 	}
 }
-.navlist{
-	width: 100%;
-	height: 0.45rem;
-	display: flex;
-	justify-content: space-around;
-	align-items: flex-end;
-	border-bottom: 0.01rem solid #eee;
-	a{
-		text-decoration: none;
-		font-size: 0.14rem;
-		color: #666;
-		div{
-			margin-top: 0.01rem;
-			height: 0.03rem;
-		}
-	}
-	.router-link-exact-active{
+.searchBar{
+	ul{
+		width: 100%;
+		height: 0.45rem;
+		display: flex;
+		justify-content: space-around;
+		align-items: flex-end;
+		border-bottom: 0.01rem solid #eee;
 		a{
-			color: #fe4070;
-
+			text-decoration: none;
+			font-size: 0.14rem;
+			color: #666;
 			div{
-				background: #fe4070;
+				margin-top: 0.01rem;
+				height: 0.03rem;
+			}
+		}
+		.router-link-exact-active{
+			a{
+				color: #fe4070;
+
+				div{
+					background: #fe4070;
+				}
 			}
 		}
 	}
+	.true{
+		position: fixed;
+		top: 0;
+		z-index: 2;
+		background: #fff;
+	}
 }
+
 
 </style>

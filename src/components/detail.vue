@@ -1,12 +1,12 @@
 <template>
 
-	<div id="box" v-if="info"> 
+	<div id="box" v-if="info">
 		<img src="http://p0.jmstatic.com/banner/area/000/000/029.jpg" id="right">
 		<swipe class="my-swipe">
 			  <swipe-item v-for="data in looplist" :key="data.__ob__.id">
 			  		<img :src="data['800']"/>
 			  </swipe-item>
-			</swipe>	
+			</swipe>
 		<p id="price"><b></b><span></span><a>价格详情</a></p>
 		<p id="nothing">已抢光</p>
 		<div id="title"><b>{{info.data.special_tags.jm_owner}}</b><span>{{info.data.name}}</span></div>
@@ -42,7 +42,7 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 				this.looplist = res.data.data.image_url_set.single_many
 				console.log(this.looplist);
 			})
-			
+
 		}
 	}
 </script>
@@ -124,7 +124,7 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 			color: #999;
 			margin-right: 0.30rem;
 		}
-		
+
 	}
 	#freight{
 		padding: 0.2rem 0;

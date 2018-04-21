@@ -79,10 +79,7 @@
 		},
 
 		mounted(){
-			axios.get("/api/v1/deal/dealactlist?card_id=4057&page=1&page_key=1524021000&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj").then(res=>{
-			//	console.log(res.data.item_list);
-
-				//this.datalist= res.data.item_list;
+			axios.get("/api/v1/deal/dealactlist?card_id=4057&page=2&page_key=1524021000&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj").then(res=>{
 				for(var i=0;i<res.data.item_list.length;i++){
           if (res.data.item_list[i].type!=="jmstore") {
             this.datalist.push(res.data.item_list[i]);

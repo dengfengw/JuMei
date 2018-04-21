@@ -1,28 +1,21 @@
 <template>
-	<div id="box" style="position: absolute;top:0;z-index: 4;">
-		<div style="
-    height: 0.5rem;
-    background: #fff;
-    font-size: 0.14rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 0.3rem;
 
-">
-			<router-link class="iconfont icon-back" style="font-size: 0.25rem;" to="/home/today"></router-link>
-		 	<div v-if="info">{{info.data.properties[0].value}}</div>
-		 	<i class="iconfont icon-all" style="font-size: 0.25rem;"></i>
+	<div id="box" style="position: absolute;top:0;z-index: 4;"> 
+		<div id="box_header">
+			<router-link class="iconfont icon-back" style="font-size: 0.25rem; text-decoration: none;" to="/home/today"></router-link>
+		 	<div v-if="info">{{info.data.properties[0].value}}</div> 
+		 	<router-link class="iconfont icon-all" style="font-size: 0.25rem; text-decoration: none;" to="/home/today"></router-link>
 		</div>
 		<div v-if="info">
 			<img :src="info.data.area_icon_v2" id="right">
+
 			<swipe class="my-swipe">
 				<swipe-item v-for="data in looplist" :key="data.__ob__.id">
 				  	<img :src="data['800']"/>
 				</swipe-item>
 			</swipe>
 		</div>
-
+		
 		<div v-if="info1">
 			<p id="price"><b>￥{{info1.data.result.jumei_price}}</b><span>￥{{info1.data.result.market_price}}</span><a>价格详情</a><i>{{info1.data.result.product_desc}}</i></p>
 			<p id="nothing">已抢光</p>
@@ -31,19 +24,45 @@
 			<div id="title"><b>{{info.data.special_tags.jm_owner}}</b><span>{{info.data.name}}</span></div>
 		</div>
 		<div v-if="info1">
-
-			<div id="freight"><span>运费</span><a>{{info1.data.result.freight.text}}</a></div>
-		<div id="explain"><span>说明</span><a>{{info1.data.result.icon_tag[0].name}}&nbsp;&nbsp;{{info1.data.result.icon_tag[1].name}}</br>{{info1.data.result.icon_tag[2].name}}&nbsp;&nbsp;支持分期</a></div>
-		<div id="choose"><span>请选择</span><a>型号&nbsp;&nbsp;分类</a></div>
+			
+			<div id="freight">
+				<span>运费</span><a>{{info1.data.result.freight.text}}</a>
+			</div>
+			<div id="explain">
+				<span>说明</span><a>{{info1.data.result.icon_tag[0].name}}&nbsp;&nbsp;{{info1.data.result.icon_tag[1].name}}</br>{{info1.data.result.icon_tag[2].name}}&nbsp;&nbsp;支持分期</a>
+			</div>
+			<div id="choose">
+				<span>请选择</span><a>型号&nbsp;&nbsp;分类</a>
+			</div>
 		</div>
 		<div id="shop" v-if="info1">
-				<img :src="info1.data.result.shop_info.logo_url['320']">
+				<img :src="info1.data.result.shop_info.logo_url?info1.data.result.shop_info.logo_url['320']:null">
 				<p id="shop_title">{{info1.data.result.shop_info.store_title}}</p><a>{{info1.data.result.shop_info.is_proprietary}}</a><b>{{info1.data.result.shop_info.is_authorization}}</b>
 				<i>{{info1.data.result.shop_info.button_text}}</i>
-			</div>
-		<div id="box_car">
-			<span class="iconfont icon-store">店铺</span><span class="iconfont icon-cart">购物车</span><span>加入购物车</span><span>立即购买</span>
-		</div>
+			</div>	
+		<div id="box_footer">
+		<ul>
+			<router-link to="/home" tag="li">
+				<i class="iconfont icon-store" id="box_footer_shop"></i>
+				<p>店铺</p>
+			</router-link>
+			<router-link to="/car" tag="li" id="box_footer_car">
+				<i class="iconfont icon-bags"></i>
+				<p>购物车</p>
+			</router-link>
+			<transition name="bounce">
+				<div id="box_footer_incar" @click="handleClick()">
+
+					<p>加入购物车</p>
+				</div>
+			</transition>
+			
+			<router-link to="/my" tag="li" id="box_footer_buy">
+				<p>立即购买</p>
+			</router-link>
+
+		</ul>
+	</div>
 	</div>
 </template>
 
@@ -51,7 +70,6 @@
 import axios from "axios";
 //import observer from "../observer"
 import 'vue-swipe/dist/vue-swipe.css';
-
 import { Swipe, SwipeItem } from 'vue-swipe';
 	export default{
 		data(){
@@ -66,22 +84,27 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 			"swipe-item":SwipeItem
 		},
 		mounted(){
-			console.log(this.$route.params.id);
-			axios.get("/product/ajaxStaticDetail?item_id="+this.$route.params.id+"&type=global_deal").then(res=>{
-				console.log(res.data)
+			var url=window.location.pathname;
+			//console.log(url);
+			//console.log(url.substring(8));
+			axios.get("/product/ajaxStaticDetail?item_id="+url.substring(8)).then(res=>{
+				//h5.jumei.com/product/ajaxStaticDetail?item_id=df1803236501340p3685498&type=jumei_pop
+				//console.log(res.data)
 				this.info = res.data
-				console.log(this.info.data.area_icon_v2);
+				//console.log(this.info.data.area_icon_v2);
 				this.looplist = res.data.data.image_url_set.single_many
-				console.log(this.looplist);
+				//console.log(this.looplist);
+				//console.log(window.location.port);
 			})
-			axios.get("/product/ajaxDynamicDetail?item_id="+this.$route.params.id+"&type=global_deal").then(res=>{
-				console.log(res.data)
+			axios.get("/product/ajaxDynamicDetail?item_id="+url.substring(8)).then(res=>{
+				//console.log(res.data)
 				this.info1 = res.data
 				//console.log(this.info.data.area_icon_v2);
-				console.log(this.info1.data.result.shop_info.logo_url['320']);
+				//console.log(this.info1.data.result.shop_info.logo_url['800']);
 				//this.looplist = res.data.data.image_url_set.single_many
 				//console.log(this.looplist);
 			})
+			
 		}
 	}
 </script>
@@ -93,6 +116,15 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 	}
 	img{
 		display: block;
+	}
+	#box_header{
+		height: 0.5rem;
+	    background: #fff;
+	    font-size: 0.14rem;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 0 0.3rem;
 	}
 	.my-swipe {
 	  height: 3.75rem;;
@@ -173,7 +205,7 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 			color: #999;
 			margin-right: 0.30rem;
 		}
-
+		
 	}
 	#freight{
 		padding: 0.2rem 0;
@@ -225,7 +257,7 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 			background-color: #fe4070;
 			color: white;
 			padding:0 0.02rem;
-			border-radius: 0.04rem;
+			border-radius: 0.04rem;	
 			}
 		i{
 			width: 1rem;
@@ -240,11 +272,61 @@ import { Swipe, SwipeItem } from 'vue-swipe';
 			border-radius: 0.4rem;
 		}
 	}
-	#box_car{
-		margin: 0.4rem 0;
-		background: white;
-		z-index: 4;
-		position: fixed;
-		bottom: 0;
+	li{
+	list-style: none;
+}
+#box_footer{
+	background: #fff;
+	font-size: 0.14rem;
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+	height: 0.5rem;
+	width: 100%;
+	border-top: 1px solid rgb(238, 238, 238);
+	ul{
+		height: 0.5rem;
+		display: flex;
+		//justify-content: space-around;
+		align-items: center;
+		li{
+			text-align: center;
+			a{
+				text-decoration: none;
+				color: #666;
+			}
+		}
+		
+	}
+}
+#box_footer_car,#box_footer_shop{
+	padding:0 0.16rem;
+}
+#box_footer_shop{
+	margin-left: 0.07rem;
+}
+#box_footer_incar{
+	background-color: #fff1f6;
+	color:#fe4070;
+	padding:0.18rem 0.3rem;
+}
+#box_footer_buy{
+	background-color: #fe4070;
+	color:white;
+	padding:0.18rem 0.3rem;
+}
+.bounce-enter-active {
+		animation: bounce-in .5s;
+	}
+	.bounce-leave-active {
+		animation: bounce-in .5s reverse;
+	}
+	@keyframes bounce-in {
+		0% {
+			transform:translateX(100%);
+		}
+		100% {
+			transform:translateY(0px);
+		}
 	}
 </style>

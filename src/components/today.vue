@@ -5,7 +5,7 @@
   infinite-scroll-disabled="loading"
   infinite-scroll-immediate-check	="false"
   infinite-scroll-distance="0">
-				<li v-for="data in datalist" @click="handleClick(data.item_id)" >
+				<li v-for="data in datalist" @click="handleClick(data.item_id,data.type)" >
 				
 				<h5 id="title">{{data.name}}</h5>
 				<p id="price">￥{{data.jumei_price}}<span>{{data.market_price}}</span></p>
@@ -23,9 +23,9 @@
 	import router from  "../router";
 	import axios from "axios";
 
-	/*import { InfiniteScroll } from 'mint-ui';
+	import { InfiniteScroll } from 'mint-ui';
 	import Vue from "vue";
-	Vue.use(InfiniteScroll);*/
+	Vue.use(InfiniteScroll);
 
 	export default {
 
@@ -44,46 +44,34 @@
 
 		mounted(){
 			axios.get("/api/v1/deal/dealactlist?card_id=4057&page=1&page_key=1524021000&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj").then(res=>{
-				console.log(res.data.item_list);
+				//console.log(res.data.item_list);
 				for(var i=0;i<res.data.item_list.length;i++){
-				if(res.data.item_list[i].type=="global_deal" || res.data.item_list[i].type=="jumei_pop"){
+				if(res.data.item_list[i].type=="jumei_pop" || res.data.item_list[i].type=="global_deal"){
 					this.datalist.push(res.data.item_list[i]);
 				}
 				console.log(this.datalist);
 			}
-				for(var i=0;i<res.data.item_list.length;i++){
+				/*for(var i=0;i<res.data.item_list.length;i++){
 						console.log(res.data.item_list[i].type);
-				}
-				
-				
-				//this.total =res.data.data.page.total //总页数
+				}*/
 			})
 		},
 
 		methods:{
-			handleClick(id){
+			handleClick(id,type){
 				
-				router.push(`/detail/${id}`);
+				router.push("/detail/"+id+"&type="+type);
 				
-			}
+			},
 
-			/*loadMore(){
-				console.log("滚动到底部了");
-				this.current++;
-
-				if(this.current>this.total){
-					this.loading = true;
-					this.text= "没有数据了"
-					return ;
-				}*/
-
-				/*axios.get(`/v4/api/film/now-playing?page=${this.current}&count=7`).then(res=>{
+			loadMore(){
+				axios.get(`/api/v1/deal/dealactlist?card_id=4057&page=${this.current}&page_key=1524021000&platform=wap&client_v=1.0&user_tag_id=0&source=touch&site=bj"`).then(res=>{
 					console.log(res.data);
-					this.datalist= [...this.datalist,...res.data.data.films]; //合并两个数组
-				})*/
-			
 
+					this.datalist= [...this.datalist,...res.data.item_list]; //合并两个数组
+				})
 		}
+	}
 
 	}
 </script>

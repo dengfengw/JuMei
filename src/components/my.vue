@@ -4,15 +4,15 @@
 			<div class="head-title">
 				<i class="iconfont icon-back"></i>
 				<h3>
-				聚美
+					{{name}}聚美	
 				</h3>
 				<img src = "../assets/home.png" @click="backHome()"/>
 			</div>
 			<div class="head-user">
 				<img src = "../assets/man.png"/>
 				<p>
-					<a @click="login()">注册</a>
-					<a @click="register()">登录</a>
+					<a @click="register()">注册</a>
+					<a @click="login()">登录</a>
 				</p>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 			<p>客服热线400-123-8888(8:00-22:00)</p>
 			<p>拨打前请记录您的UID 0</p>
 		</div>
-
+		
 	</div>
 </template>
 
@@ -108,7 +108,7 @@
 				width: 0.3rem;
 				height: 0.3rem;
 			}
-
+			
 		}
 		.head-user{
 			display: flex;
@@ -195,7 +195,7 @@
 		i{
 			font-size: 0.2rem;
 		}
-	}
+	}	
 	.money-type{
 		display: flex;
 		justify-content: space-around;
@@ -218,14 +218,14 @@
 			align-items:center;
 			height: 0.35rem;
 			background: #fff;
-			margin-bottom: 0.03rem;
-			padding: 0 0.2rem;
+			margin-bottom: 0.03rem;	
+			padding: 0 0.2rem;	
 		}
 		i{
 			margin-right: 0.1rem;
 			font-size: 0.2rem;
 		}
-			span:nth-of-type(2){
+			span:nth-of-type(2S){
 			font-size: 0.2rem;
 		}
 	}
